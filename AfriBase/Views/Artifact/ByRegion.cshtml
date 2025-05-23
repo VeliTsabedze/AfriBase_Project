@@ -1,0 +1,329 @@
+﻿@model IEnumerable<AfriBase.Models.Artifact>
+
+@{
+    ViewData["Title"] = ViewData["RegionName"] + " Artifacts";
+    var regionName = ViewData["RegionName"]?.ToString();
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Artifact" asp-action="Index">Artifacts</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="ExploreRegions">Regions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@regionName</li>
+        </ol>
+    </nav>
+
+    <!-- Region Header -->
+    <div class="tribal-bg-2 p-5 text-center mb-5 rounded shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div>
+                    @switch (regionName)
+                    {
+                        case "WestAfrica":
+                            <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                            <h1 class="display-4">West Africa</h1>
+                            break;
+                        case "NorthAfrica":
+                            <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                            <h1 class="display-4">North Africa</h1>
+                            break;
+                        case "EastAfrica":
+                            <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                            <h1 class="display-4">East Africa</h1>
+                            break;
+                        case "CentralAfrica":
+                            <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                            <h1 class="display-4">Central Africa</h1>
+                            break;
+                        case "SouthernAfrica":
+                            <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                            <h1 class="display-4">Southern Africa</h1>
+                            break;
+                        default:
+                            <i class="fas fa-globe-africa fa-4x mb-3 text-afribase"></i>
+                            <h1 class="display-4">@regionName</h1>
+                            break;
+                    }
+                    <p class="lead">
+                        Exploring Artifacts from @(regionName == "WestAfrica" ? "West Africa" :
+                        regionName == "NorthAfrica" ? "North Africa" :
+                        regionName == "EastAfrica" ? "East Africa" :
+                        regionName == "CentralAfrica" ? "Central Africa" :
+                        regionName == "SouthernAfrica" ? "Southern Africa" : regionName)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Region Info -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h3 border-pattern mb-4">
+                        About @(regionName == "WestAfrica" ? "West African" :
+                        regionName == "NorthAfrica" ? "North African" :
+                        regionName == "EastAfrica" ? "East African" :
+                        regionName == "CentralAfrica" ? "Central African" :
+                        regionName == "SouthernAfrica" ? "Southern African" : regionName) Art
+                    </h2>
+
+                    @switch (regionName)
+                    {
+                        case "WestAfrica":
+                            <p>West Africa encompasses a vibrant cultural region including countries such as Nigeria, Ghana, Senegal, Mali, and Côte d'Ivoire. This region is known for its rich artistic traditions, including bronze and brass casting, wood carving, textiles, and ceremonial arts.</p>
+                            <p>West African art is often characterized by stylized human forms, geometric patterns, and objects that serve both aesthetic and functional purposes. Famous artistic traditions include the bronzes of Benin and Ife, Dogon masks and sculptures, Asante gold weights, and the vibrant kente cloth of Ghana.</p>
+                            break;
+
+                        case "NorthAfrica":
+                            <p>North Africa, comprising Morocco, Algeria, Tunisia, Libya, and Egypt, features distinctive artistic traditions influenced by Mediterranean, Arab, Berber, and Islamic cultures. This region's art is characterized by geometric designs, calligraphy, architectural elements, and intricate decorative arts.</p>
+                            <p>Notable artistic traditions include Moroccan ceramics and carpets, Egyptian papyrus paintings and metalwork, Tunisian mosaics, and elaborately decorated textiles. Islamic architectural influences are evident in many decorative arts, featuring arabesques and geometric patterns.</p>
+                            break;
+
+                        case "EastAfrica":
+                            <p>East Africa includes countries such as Ethiopia, Kenya, Tanzania, Uganda, and Somalia, with artistic traditions that reflect diverse cultural influences. This region is known for its beadwork, basketry, pottery, ceremonial objects, and religious art.</p>
+                            <p>Notable artistic traditions include Ethiopian religious paintings and crosses, Maasai beaded jewelry, Makonde sculptures from Tanzania, Ugandan bark cloth, and the decorative arts of Swahili coastal communities. Many East African arts emphasize portable objects due to historically nomadic lifestyles.</p>
+                            break;
+
+                        case "CentralAfrica":
+                            <p>Central Africa encompasses countries such as the Democratic Republic of Congo, Cameroon, Gabon, and the Central African Republic. This region is renowned for its elaborate masks, figurative sculptures, and ritual objects with distinctive stylized forms.</p>
+                            <p>Famous artistic traditions include Kuba textiles and masks, Fang reliquary figures, Luba headrests and stools, and Kota reliquary guardian figures. Central African art often features abstracted human forms and serves important roles in ritual and social contexts.</p>
+                            break;
+
+                        case "SouthernAfrica":
+                            <p>Southern Africa includes South Africa, Zimbabwe, Botswana, Namibia, and Mozambique, with artistic traditions that reflect diverse cultural histories and environments. This region features distinctive beadwork, basketry, pottery, and contemporary art forms.</p>
+                            <p>Notable artistic traditions include Ndebele house painting and beadwork, Zulu pottery and basketry, Shona stone sculpture from Zimbabwe, and contemporary South African fine art. Southern African art often combines traditional techniques with innovative approaches to form and material.</p>
+                            break;
+
+                        default:
+                            <p>This region of Africa represents one of many diverse cultural areas across the continent, each with its own artistic traditions reflecting local histories, environments, and social structures.</p>
+                            <p>African art typically combines aesthetic expression with functional purpose, often serving important roles in community life, ritual practices, and cultural identity. Understanding these regional variations enhances appreciation for the continent's rich artistic heritage.</p>
+                            break;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Artifacts from this Region -->
+    <h2 class="h3 border-pattern mb-4">
+        Artifacts from @(regionName == "WestAfrica" ? "West Africa" :
+        regionName == "NorthAfrica" ? "North Africa" :
+        regionName == "EastAfrica" ? "East Africa" :
+        regionName == "CentralAfrica" ? "Central Africa" :
+        regionName == "SouthernAfrica" ? "Southern Africa" : regionName)
+    </h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            @foreach (var artifact in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 card-afribase">
+                        <div class="position-relative">
+                            <img src="@artifact.ImageUrl" class="card-img-top" alt="@artifact.Name" style="height: 250px; object-fit: cover;">
+                            <span class="origin-badge">@artifact.Origin</span>
+                            @if (artifact.IsAvailableForBidding)
+                            {
+                                <span class="badge bg-success position-absolute top-0 start-0 m-2">Available for Bidding</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@artifact.Name</h5>
+                            <p class="card-text text-muted mb-1">@artifact.Category • @artifact.Condition</p>
+                            <p class="card-text text-muted mb-2">Est. Year: @artifact.EstimatedYear</p>
+                            <p class="card-text small text-truncate mb-3">@artifact.Description</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-secondary">@artifact.Category</span>
+                                <span class="fw-bold text-afribase">
+                                    @if (artifact.IsAvailableForBidding)
+                                    {
+                                        var highestBid = artifact.Bids.OrderByDescending(b => b.BidAmount).FirstOrDefault();
+                                        if (highestBid != null)
+                                        {
+                                            <text>Current Bid: $@highestBid.BidAmount.ToString("N2")</text>
+                                        }
+                                        else if (artifact.StartingBid.HasValue)
+                                        {
+                                            <text>Starting Bid: $@artifact.StartingBid.Value.ToString("N2")</text>
+                                        }
+                                        else
+                                        {
+                                            <text>No bids yet</text>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <text>Value: $@artifact.EstimatedValue.ToString("N2")</text>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top d-grid">
+                            <a asp-controller="Artifact" asp-action="Details" asp-route-id="@artifact.ArtifactId" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mb-5">
+            <i class="fas fa-info-circle me-2"></i> No artifacts from this region are currently available. Please check back later or explore other regions.
+        </div>
+    }
+
+    <!-- Notable Countries -->
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+            <h2 class="h3 mb-3">Notable Countries in this Region</h2>
+
+            @switch (regionName)
+            {
+                case "WestAfrica":
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Nigeria</h3>
+                            <p class="small">Home to Benin bronzes, Yoruba sculptures, Igbo masks, and contemporary artists.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Ghana</h3>
+                            <p class="small">Known for kente cloth, Asante gold weights, adinkra symbols, and Fante flags.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Mali</h3>
+                            <p class="small">Famous for Dogon masks and sculptures, mud architecture, and bogolan (mud cloth).</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Senegal</h3>
+                            <p class="small">Notable for glass painting, woven textiles, wooden sculptures, and contemporary art.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "NorthAfrica":
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Morocco</h3>
+                            <p class="small">Renowned for ceramics, carpets, metalwork, leatherwork, and architectural arts.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Egypt</h3>
+                            <p class="small">Famous for ancient artifacts, Coptic textiles, metalwork, and contemporary art forms.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Tunisia</h3>
+                            <p class="small">Known for ceramics, mosaics, carpets, and jewelry influenced by multiple cultures.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Algeria</h3>
+                            <p class="small">Notable for Berber jewelry, carpets, pottery, and distinctive architectural styles.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "EastAfrica":
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Ethiopia</h3>
+                            <p class="small">Known for religious paintings, illuminated manuscripts, crosses, and textiles.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Kenya</h3>
+                            <p class="small">Famous for Maasai beadwork, Kisii soapstone carvings, and Kikuyu ceremonial arts.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Tanzania</h3>
+                            <p class="small">Home to Makonde carvings, Tingatinga paintings, and Maasai cultural artifacts.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Uganda</h3>
+                            <p class="small">Notable for bark cloth, basketry, pottery, and musical instruments.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "CentralAfrica":
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>DR Congo</h3>
+                            <p class="small">Known for Kuba textiles, Luba sculptures, Pende masks, and contemporary painting.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Cameroon</h3>
+                            <p class="small">Famous for Bamum sculptures, Bamileke beadwork, and Grassfields royal arts.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Gabon</h3>
+                            <p class="small">Home to Fang reliquary figures, Kota guardian figures, and maskmaking traditions.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Chad</h3>
+                            <p class="small">Notable for pottery, leatherwork, basketry, and ceremonial objects.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "SouthernAfrica":
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>South Africa</h3>
+                            <p class="small">Known for Ndebele painting, Zulu beadwork, contemporary fine arts, and ceramics.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Zimbabwe</h3>
+                            <p class="small">Famous for Shona stone sculpture, pottery, basketry, and traditional textiles.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Botswana</h3>
+                            <p class="small">Home to distinctive basket weaving, beadwork, and pottery traditions.</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Namibia</h3>
+                            <p class="small">Notable for Himba jewelry, San rock art, contemporary crafts, and basketry.</p>
+                        </div>
+                    </div>
+                    break;
+
+                default:
+                    <p>This region encompasses several countries, each with their own distinct artistic traditions and cultural practices. Explore the artifacts to discover the unique characteristics of art from this area of the African continent.</p>
+                    break;
+            }
+        </div>
+    </div>
+
+    <!-- Explore Other Regions -->
+    <h2 class="h3 mb-4">Explore Other Regions</h2>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4 mb-5">
+        @foreach (var region in Enum.GetValues(typeof(AfriBase.Models.AfricanRegion)))
+        {
+            if (region.ToString() != regionName)
+            {
+                <div class="col">
+                    <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="@region" class="text-decoration-none">
+                        <div class="card h-100 text-center p-4">
+                            <i class="fas fa-map-marked-alt fa-3x text-afribase mb-3"></i>
+                            <h3 class="h5">
+                                @(region.ToString() == "WestAfrica" ? "West Africa" :
+                                    region.ToString() == "NorthAfrica" ? "North Africa" :
+                                    region.ToString() == "EastAfrica" ? "East Africa" :
+                                    region.ToString() == "CentralAfrica" ? "Central Africa" :
+                                    region.ToString() == "SouthernAfrica" ? "Southern Africa" : region.ToString())
+                            </h3>
+                            <p class="small text-muted">Explore Artifacts</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>

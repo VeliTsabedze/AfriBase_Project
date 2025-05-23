@@ -1,0 +1,290 @@
+﻿@model AfriBase.ViewModels.BidDashboardViewModel
+
+@{
+    ViewData["Title"] = "Bid Dashboard";
+}
+
+<div class="container">
+    <h1 class="border-pattern mb-4">Bid Management Dashboard</h1>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white border-0 shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-1 text-white-50">Total Bids</h6>
+                            <h2 class="card-title mb-0">@Model.Statistics.TotalBids</h2>
+                        </div>
+                        <div class="h1 mb-0">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white border-0 shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-1 text-white-50">Last 24 Hours</h6>
+                            <h2 class="card-title mb-0">@Model.Statistics.BidsLast24Hours</h2>
+                        </div>
+                        <div class="h1 mb-0">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-info text-white border-0 shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-1 text-white-50">Available Artifacts</h6>
+                            <h2 class="card-title mb-0">@Model.Statistics.AvailableArtifacts</h2>
+                        </div>
+                        <div class="h1 mb-0">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-white border-0 shadow h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-subtitle mb-1 text-white-50">Total Bid Value</h6>
+                            <h2 class="card-title mb-0">$@Model.Statistics.TotalBidValue.ToString("N0")</h2>
+                        </div>
+                        <div class="h1 mb-0">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <!-- Active Bids -->
+        <div class="col-lg-8 mb-4">
+            <div class="dashboard-panel">
+                <div class="panel-header d-flex justify-content-between align-items-center">
+                    <h3 class="h5 mb-0">Active Bids</h3>
+                    <span class="badge bg-light text-dark">@Model.ActiveBids.Count</span>
+                </div>
+                <div class="panel-body">
+                    @if (Model.ActiveBids.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Artifact</th>
+                                        <th>Bidder</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bid in Model.ActiveBids)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="@bid.ArtifactImageUrl" alt="@bid.ArtifactName" class="me-2" width="40" height="40" style="object-fit: cover; border-radius: 4px;">
+                                                    <a asp-controller="Artifact" asp-action="Details" asp-route-id="@bid.ArtifactId" class="text-decoration-none">@bid.ArtifactName</a>
+                                                </div>
+                                            </td>
+                                            <td>@bid.BidderName</td>
+                                            <td class="fw-bold text-primary">$@bid.BidAmount.ToString("N2")</td>
+                                            <td>@bid.BidDate</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <form asp-controller="Bid" asp-action="AcceptBid" asp-route-id="@bid.BidId" method="post" class="me-1">
+                                                        <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to accept this bid?');">
+                                                            <i class="fas fa-check-circle"></i> Accept
+                                                        </button>
+                                                    </form>
+                                                    <form asp-controller="Bid" asp-action="RejectBid" asp-route-id="@bid.BidId" method="post">
+                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to reject this bid?');">
+                                                            <i class="fas fa-times-circle"></i> Reject
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i> No active bids at the moment.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Artifacts -->
+        <div class="col-lg-4 mb-4">
+            <div class="dashboard-panel">
+                <div class="panel-header d-flex justify-content-between align-items-center">
+                    <h3 class="h5 mb-0">Available Artifacts</h3>
+                    <a asp-controller="Artifact" asp-action="Index" class="text-white text-decoration-none">
+                        <small>View All <i class="fas fa-arrow-right"></i></small>
+                    </a>
+                </div>
+                <div class="panel-body">
+                    @if (Model.AvailableArtifacts.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var artifact in Model.AvailableArtifacts)
+                            {
+                                <a asp-controller="Artifact" asp-action="Details" asp-route-id="@artifact.ArtifactId" class="list-group-item list-group-item-action">
+                                    <div class="d-flex align-items-center">
+                                        <img src="@artifact.ImageUrl" alt="@artifact.Name" class="me-3" width="50" height="50" style="object-fit: cover; border-radius: 4px;">
+                                        <div>
+                                            <h6 class="mb-0">@artifact.Name</h6>
+                                            <small class="text-muted">
+                                                Bids: @artifact.BidCount |
+                                                Current: $@artifact.CurrentHighestBid.ToString("N2")
+                                            </small>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i> No artifacts available for bidding.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Bids -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="dashboard-panel">
+                <div class="panel-header d-flex justify-content-between align-items-center">
+                    <h3 class="h5 mb-0">Recent Bid Activity</h3>
+                    <span class="badge bg-light text-dark">@Model.RecentBids.Count</span>
+                </div>
+                <div class="panel-body">
+                    @if (Model.RecentBids.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Artifact</th>
+                                        <th>Bidder</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bid in Model.RecentBids)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="@bid.ArtifactImageUrl" alt="@bid.ArtifactName" class="me-2" width="40" height="40" style="object-fit: cover; border-radius: 4px;">
+                                                    <a asp-controller="Artifact" asp-action="Details" asp-route-id="@bid.ArtifactId" class="text-decoration-none">@bid.ArtifactName</a>
+                                                </div>
+                                            </td>
+                                            <td>@bid.BidderName</td>
+                                            <td class="fw-bold text-primary">$@bid.BidAmount.ToString("N2")</td>
+                                            <td>
+                                                @switch (bid.Status)
+                                                {
+                                                    case AfriBase.Models.BidStatus.Pending:
+                                                        <span class="bid-status bid-status-pending">Pending</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Accepted:
+                                                    case AfriBase.Models.BidStatus.Won:
+                                                        <span class="bid-status bid-status-accepted">Accepted</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Rejected:
+                                                        <span class="bid-status bid-status-rejected">Rejected</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Outbid:
+                                                        <span class="bid-status bid-status-outbid">Outbid</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Withdrawn:
+                                                        <span class="bid-status">Withdrawn</span>
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>@bid.BidDate</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i> No recent bid activity.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card bg-light border-0 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Administrative Actions</h4>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Manage Artifacts</h5>
+                                    <p class="card-text">Add, edit, or remove artifacts from the database.</p>
+                                    <a asp-controller="Artifact" asp-action="Index" class="btn btn-primary">Go to Artifacts</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">View Bid Logs</h5>
+                                    <p class="card-text">Access the log files with complete bid history.</p>
+                                    <a href="#" class="btn btn-secondary" onclick="alert('This functionality is not implemented in the demo.');">
+                                        <i class="fas fa-file-alt me-1"></i> View Logs
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

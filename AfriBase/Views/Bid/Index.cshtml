@@ -1,0 +1,153 @@
+﻿@model IEnumerable<AfriBase.Models.Bid>
+
+@{
+    ViewData["Title"] = "My Bids";
+}
+
+<div class="container">
+    <h1 class="border-pattern mb-4">My Bids</h1>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h4 mb-0">Your Current Bids</h2>
+                <a asp-controller="Artifact" asp-action="Index" class="btn btn-primary">
+                    <i class="fas fa-search me-1"></i> Find Artifacts to Bid
+                </a>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    <h5 class="alert-heading">No Bids Found</h5>
+                    <p>You haven't placed any bids yet. Explore our collection of authentic African artifacts and start bidding!</p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Artifact</th>
+                                <th>Bid Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var bid in Model.OrderByDescending(b => b.BidDate))
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="@bid.Artifact.ImageUrl" alt="@bid.Artifact.Name" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                                            <div>
+                                                <a asp-controller="Artifact" asp-action="Details" asp-route-id="@bid.ArtifactId" class="text-decoration-none fw-medium">@bid.Artifact.Name</a>
+                                                <div class="small text-muted">@bid.Artifact.Origin, @bid.Artifact.EstimatedYear</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-primary">$@bid.BidAmount.ToString("N2")</td>
+                                    <td>@bid.BidDate.ToString("MMM dd, yyyy HH:mm")</td>
+                                    <td>
+                                        @switch (bid.Status)
+                                        {
+                                            case AfriBase.Models.BidStatus.Pending:
+                                                <span class="bid-status bid-status-pending">Pending</span>
+                                                break;
+                                            case AfriBase.Models.BidStatus.Accepted:
+                                            case AfriBase.Models.BidStatus.Won:
+                                                <span class="bid-status bid-status-accepted">Won</span>
+                                                break;
+                                            case AfriBase.Models.BidStatus.Rejected:
+                                                <span class="bid-status bid-status-rejected">Rejected</span>
+                                                break;
+                                            case AfriBase.Models.BidStatus.Outbid:
+                                                <span class="bid-status bid-status-outbid">Outbid</span>
+                                                break;
+                                            case AfriBase.Models.BidStatus.Withdrawn:
+                                                <span class="bid-status">Withdrawn</span>
+                                                break;
+                                            default:
+                                                <span class="bid-status">@bid.Status</span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a asp-controller="Artifact" asp-action="Details" asp-route-id="@bid.ArtifactId" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye"></i> View Artifact
+                                            </a>
+                                            @if (bid.Status == AfriBase.Models.BidStatus.Pending)
+                                            {
+                                                <form asp-controller="Bid" asp-action="CancelBid" asp-route-id="@bid.BidId" method="post" onsubmit="return confirm('Are you sure you want to cancel this bid?');">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        <i class="fas fa-times"></i> Cancel
+                                                    </button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="h5 mb-3">Bidding Tips</h3>
+                    <ul class="mb-0">
+                        <li class="mb-2">Research artifacts before bidding to understand their cultural significance.</li>
+                        <li class="mb-2">Set a budget for yourself and stick to it.</li>
+                        <li class="mb-2">Check an artifact's condition details carefully before bidding.</li>
+                        <li class="mb-2">Monitor your active bids regularly to stay competitive.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="h5 mb-3">Your Bid Statistics</h3>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Active Bids:</span>
+                        <span class="fw-bold">@Model.Count(b => b.Status == AfriBase.Models.BidStatus.Pending)</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Won Auctions:</span>
+                        <span class="fw-bold">@Model.Count(b => b.Status == AfriBase.Models.BidStatus.Won || b.Status == AfriBase.Models.BidStatus.Accepted)</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Outbid:</span>
+                        <span class="fw-bold">@Model.Count(b => b.Status == AfriBase.Models.BidStatus.Outbid)</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Total Amount Bid:</span>
+                        <span class="fw-bold">$@Model.Sum(b => b.BidAmount).ToString("N2")</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm tribal-bg-1">
+        <div class="card-body p-4">
+            <h3 class="h4 mb-3">Authentic African Artifacts</h3>
+            <p>At AfriBase, we are committed to preserving and celebrating African cultural heritage. When you bid on artifacts through our platform, you're not only acquiring unique pieces but also supporting cultural preservation efforts.</p>
+            <p class="mb-0">Each artifact comes with detailed information about its origin, cultural significance, and authenticity to ensure transparency and appreciation of African artistic traditions.</p>
+        </div>
+    </div>
+</div>

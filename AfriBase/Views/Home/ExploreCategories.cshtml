@@ -1,0 +1,257 @@
+﻿@{
+    ViewData["Title"] = "Explore African Art Categories";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Artifact" asp-action="Index">Artifacts</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+        </ol>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="tribal-bg-1 p-5 text-center mb-5 rounded shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <i class="fas fa-th-large fa-4x mb-3 text-afribase"></i>
+                <h1 class="display-4">Art Categories</h1>
+                <p class="lead">Explore the diverse forms of African artistic expression</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Introduction -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h3 border-pattern mb-4">African Art Categories</h2>
+                    <p>African art encompasses a wide range of forms, materials, and purposes across the continent's diverse cultures. From ceremonial masks to everyday pottery, each type of artwork reflects the aesthetic values, cultural practices, and environmental resources of its creators.</p>
+                    <p>Explore these categories to discover the incredible variety of African artistic traditions and their significance within their cultural contexts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+        <!-- Mask -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Mask" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-mask fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Masks</h2>
+                        <p class="small">Ceremonial masks representing spirits, ancestors, and mythological beings used in rituals and performances across Africa.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Masks</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sculpture -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Sculpture" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-monument fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Sculptures</h2>
+                        <p class="small">Three-dimensional artworks in wood, stone, metal, or clay depicting ancestors, spirits, rulers, and cultural figures.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Sculptures</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Textile -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Textile" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-tshirt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Textiles</h2>
+                        <p class="small">Woven, dyed, embroidered, and beaded fabrics and garments with symbolic patterns and cultural significance.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Textiles</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Jewelry -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Jewelry" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-gem fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Jewelry</h2>
+                        <p class="small">Adornments crafted from metals, beads, shells, and stones indicating status, identity, and spiritual protection.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Jewelry</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Pottery -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Pottery" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-mortar-pestle fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Pottery</h2>
+                        <p class="small">Ceramic vessels and figures created for practical, ceremonial, and decorative purposes with regional styles.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Pottery</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Weapon -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Weapon" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-shield-alt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Weapons</h2>
+                        <p class="small">Ceremonial and functional weapons combining artistic decoration with cultural significance and symbolic power.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Weapons</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Musical Instrument -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="MusicalInstrument" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-drum fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Musical Instruments</h2>
+                        <p class="small">Drums, string instruments, and percussion tools used in ceremonies and community gatherings with artistic decorations.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Musical Instruments</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Furniture -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Furniture" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-chair fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Furniture</h2>
+                        <p class="small">Stools, chairs, headrests, and ceremonial thrones combining functional design with cultural symbolism and artistic carving.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Furniture</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Religious Item -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="ReligiousItem" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-pray fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Religious Items</h2>
+                        <p class="small">Artifacts reflecting diverse spiritual traditions including indigenous beliefs, Christianity, Islam, and syncretic practices.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Religious Items</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Painting -->
+        <div class="col">
+            <div class="card h-100 category-card">
+                <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="Painting" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-paint-brush fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Paintings</h2>
+                        <p class="small">Visual artworks including ancient rock art, religious icons, architectural decoration, and contemporary fine art practices.</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Paintings</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Art Forms Facts -->
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+            <h2 class="h3 border-pattern mb-4">Understanding African Art Forms</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-feather-alt text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Form & Function</h3>
+                            <p class="small">African art typically combines aesthetic beauty with practical purpose. Many artifacts were created for specific cultural functions rather than solely as decorative objects, blending artistic expression with social, spiritual, or utilitarian needs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-seedling text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Materials & Environment</h3>
+                            <p class="small">Artists across Africa utilize materials available in their local environments, from wood and clay to beads and metals. These material choices reflect both practical adaptations to regional resources and cultural preferences developed over generations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-history text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Traditional & Contemporary</h3>
+                            <p class="small">While many categories highlight traditional artistic forms, each continues to evolve through contemporary expressions. Today's African artists often blend ancestral techniques with modern innovations, creating works that honor tradition while engaging with current realities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-hands text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Cultural Context</h3>
+                            <p class="small">Understanding African art requires consideration of its cultural context. Many artifacts were created for specific ceremonies, social roles, or spiritual purposes, with meanings that extend beyond their visual appearance to include performance, symbolism, and community participation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AfriBase", "AfriBase\AfriBase.csproj", "{B4D83344-33BE-4104-9BC4-BE6D26D6FA72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4D83344-33BE-4104-9BC4-BE6D26D6FA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D83344-33BE-4104-9BC4-BE6D26D6FA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D83344-33BE-4104-9BC4-BE6D26D6FA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D83344-33BE-4104-9BC4-BE6D26D6FA72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21836CFC-AA15-41A1-A79F-2E26A9AD278C}
+	EndGlobalSection
+EndGlobal

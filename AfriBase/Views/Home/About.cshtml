@@ -1,0 +1,189 @@
+﻿@{
+    ViewData["Title"] = "About AfriBase";
+}
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <h1 class="display-4 border-pattern mb-4">About AfriBase</h1>
+            <p class="lead mb-4">AfriBase is dedicated to the preservation, documentation, and celebration of authentic African artifacts and cultural heritage through digital management and auction services.</p>
+            <p class="mb-4">Our mission is to create a platform that connects collectors, museums, researchers, and enthusiasts with authentic African artifacts while ensuring cultural heritage is preserved and properly documented. We strive to make African art and artifacts accessible to a global audience while respecting their historical and cultural significance.</p>
+        </div>
+        <div class="col-lg-4">
+            <img src="~/images/about-image.png" alt="African Artifacts" class="img-fluid rounded shadow-sm" />
+        </div>
+    </div>
+
+    <!-- Our Vision Section -->
+    <div class="row mb-5 section-pattern py-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="border-pattern">Our Vision</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-landmark fa-3x text-afribase mb-3"></i>
+                    <h3 class="h4 mb-3">Preserve</h3>
+                    <p class="card-text">We are committed to preserving African cultural heritage by documenting and digitizing artifacts, ensuring their history and significance are not lost to time.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-handshake fa-3x text-afribase mb-3"></i>
+                    <h3 class="h4 mb-3">Connect</h3>
+                    <p class="card-text">We create connections between artists, collectors, and cultural institutions around the world, fostering a global community dedicated to African art.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <i class="fas fa-lightbulb fa-3x text-afribase mb-3"></i>
+                    <h3 class="h4 mb-3">Educate</h3>
+                    <p class="card-text">We aim to educate people about the rich diversity and historical significance of African art and cultural artifacts through detailed documentation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cultural Regions Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="border-pattern">Explore African Cultural Regions</h2>
+            <p class="lead mb-4">Africa's diverse cultural heritage spans many regions, each with their unique artistic traditions and artifacts.</p>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="row g-0 h-100">
+                    <div class="col-md-5">
+                        <img src="~/images/west-africa.jpg" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="West Africa">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h3 class="card-title h4">West Africa</h3>
+                            <p class="card-text">Known for its wooden masks, bronze sculptures, and textiles. Countries include Nigeria, Ghana, Mali, and Senegal, with artifacts from diverse cultures such as the Yoruba, Ashanti, and Dogon peoples.</p>
+                            <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="WestAfrica" class="btn btn-outline-primary btn-sm">Explore West African Artifacts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="row g-0 h-100">
+                    <div class="col-md-5">
+                        <img src="~/images/east-africa.jpg" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="East Africa">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h3 class="card-title h4">East Africa</h3>
+                            <p class="card-text">Features beadwork, jewelry, and wooden carvings. Includes countries like Kenya, Tanzania, Ethiopia, and Uganda, with artifacts from the Maasai, Kikuyu, and other ethnic groups.</p>
+                            <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="EastAfrica" class="btn btn-outline-primary btn-sm">Explore East African Artifacts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="row g-0 h-100">
+                    <div class="col-md-5">
+                        <img src="~/images/southern-africa.jpg" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="Southern Africa">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h3 class="card-title h4">Southern Africa</h3>
+                            <p class="card-text">Rich in basketry, beadwork, and pottery. Countries include South Africa, Zimbabwe, Botswana, and Namibia, with artifacts from the Zulu, Ndebele, and San peoples.</p>
+                            <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="SouthernAfrica" class="btn btn-outline-primary btn-sm">Explore Southern African Artifacts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="row g-0 h-100">
+                    <div class="col-md-5">
+                        <img src="~/images/north-africa.jpg" class="img-fluid rounded-start h-100" style="object-fit: cover;" alt="North Africa">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h3 class="card-title h4">North Africa</h3>
+                            <p class="card-text">Known for its metalwork, carpets, and ceramics. Includes Egypt, Morocco, Tunisia, and Algeria, with artifacts influenced by both African and Mediterranean traditions.</p>
+                            <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="NorthAfrica" class="btn btn-outline-primary btn-sm">Explore North African Artifacts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2 class="border-pattern">How AfriBase Works</h2>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm text-center h-100">
+                <div class="card-body p-4">
+                    <div class="display-4 text-afribase mb-3">1</div>
+                    <h3 class="h5 mb-3">Create an Account</h3>
+                    <p class="card-text">Register to join our community of collectors, sellers, and enthusiasts interested in African artifacts.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm text-center h-100">
+                <div class="card-body p-4">
+                    <div class="display-4 text-afribase mb-3">2</div>
+                    <h3 class="h5 mb-3">Browse Artifacts</h3>
+                    <p class="card-text">Explore our collection of authenticated African artifacts from various regions and categories.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm text-center h-100">
+                <div class="card-body p-4">
+                    <div class="display-4 text-afribase mb-3">3</div>
+                    <h3 class="h5 mb-3">Place Bids</h3>
+                    <p class="card-text">Bid on artifacts that interest you, building your collection of authentic African pieces.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-0 shadow-sm text-center h-100">
+                <div class="card-body p-4">
+                    <div class="display-4 text-afribase mb-3">4</div>
+                    <h3 class="h5 mb-3">Win & Collect</h3>
+                    <p class="card-text">Upon winning, finalize the transaction and add the artifact to your collection.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card bg-afribase text-white border-0 shadow-sm">
+                <div class="card-body p-5 text-center">
+                    <h3 class="card-title mb-3">Join Our Community Today</h3>
+                    <p class="lead mb-4">Start exploring authentic African artifacts and connect with collectors around the world.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg">Create Account</a>
+                        <a asp-controller="Artifact" asp-action="Index" class="btn btn-outline-light btn-lg">Browse Artifacts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

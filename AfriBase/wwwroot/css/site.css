@@ -1,0 +1,180 @@
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fcfbf7;
+    color: #333;
+}
+
+/* Bootstrap Overrides */
+.btn-primary {
+    background-color: #d35400;
+    border-color: #d35400;
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #e67e22;
+        border-color: #e67e22;
+    }
+
+.btn-outline-primary {
+    color: #d35400;
+    border-color: #d35400;
+}
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus,
+    .btn-outline-primary:active {
+        background-color: #d35400;
+        border-color: #d35400;
+    }
+
+.text-primary {
+    color: #d35400 !important;
+}
+
+/* Card styling */
+.card {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: #d35400;
+    box-shadow: 0 0 0 0.25rem rgba(211, 84, 0, 0.25);
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+    border-radius: 0.25rem;
+}
+
+/* Hero section */
+.hero {
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 5rem 0;
+    position: relative;
+}
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Region cards */
+.region-card {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+    .region-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+    }
+
+.region-card-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}
+
+/* Artifact details */
+.artifact-image {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.bid-history {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Footer */
+.footer {
+    background-color: #2c3e50;
+}
+
+.footer-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+    .footer-link:hover {
+        color: white;
+    }
+
+.footer-divider {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Status badges */
+.status-badge-pending {
+    background-color: #3498db;
+    color: white;
+}
+
+.status-badge-accepted {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.status-badge-rejected {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.status-badge-outbid {
+    background-color: #f39c12;
+    color: white;
+}

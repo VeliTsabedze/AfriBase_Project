@@ -1,0 +1,355 @@
+﻿@model IEnumerable<AfriBase.Models.Artifact>
+
+@{
+    ViewData["Title"] = ViewData["CategoryName"] + " Artifacts";
+    var categoryName = ViewData["CategoryName"]?.ToString();
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Artifact" asp-action="Index">Artifacts</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="ExploreCategories">Categories</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@categoryName</li>
+        </ol>
+    </nav>
+
+    <!-- Category Header -->
+    <div class="tribal-bg-1 p-5 text-center mb-5 rounded shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div>
+                    @switch (categoryName)
+                    {
+                        case "Mask":
+                            <i class="fas fa-mask fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Sculpture":
+                            <i class="fas fa-monument fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Textile":
+                            <i class="fas fa-tshirt fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Jewelry":
+                            <i class="fas fa-gem fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Pottery":
+                            <i class="fas fa-mortar-pestle fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Weapon":
+                            <i class="fas fa-shield-alt fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "MusicalInstrument":
+                            <i class="fas fa-drum fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Furniture":
+                            <i class="fas fa-chair fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "ReligiousItem":
+                            <i class="fas fa-pray fa-4x mb-3 text-afribase"></i>
+                            break;
+                        case "Painting":
+                            <i class="fas fa-paint-brush fa-4x mb-3 text-afribase"></i>
+                            break;
+                        default:
+                            <i class="fas fa-cubes fa-4x mb-3 text-afribase"></i>
+                            break;
+                    }
+                    <h1 class="display-4">@categoryName</h1>
+                    <p class="lead">Exploring @categoryName Artifacts from Across Africa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Info -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h3 border-pattern mb-4">About African @categoryName</h2>
+
+                    @switch (categoryName)
+                    {
+                        case "Mask":
+                            <p>African masks are among the most recognized and celebrated forms of African art. Created for ceremonies, rituals, and social events, masks represent spirits, ancestors, mythological characters, and moral values. The mask's power often activates during performances, when dancers embody the spirit represented.</p>
+                            <p>Mask styles vary dramatically across regions: West African masks often feature stylized human and animal forms, Central African masks may combine human and animal elements in abstract compositions, while East African masks might incorporate colorful beadwork and natural materials.</p>
+                            break;
+
+                        case "Sculpture":
+                            <p>African sculpture encompasses a vast range of forms, from small figurines to monumental works, crafted from materials including wood, bronze, ivory, stone, and clay. These sculptures often represent ancestors, spirits, rulers, and important cultural figures.</p>
+                            <p>Sculptural traditions vary widely: Yoruba and Benin bronze casting created naturalistic royal portraits, Dogon and Bambara wooden sculptures feature abstract geometric forms, while contemporary African sculptors blend traditional techniques with modern influences and materials.</p>
+                            break;
+
+                        case "Textile":
+                            <p>African textiles showcase remarkable diversity in techniques, patterns, and cultural significance. From Ghana's colorful kente cloth to Mali's mud cloth (bogolanfini) and Ethiopia's intricate cotton embroidery, textiles often convey cultural identity, social status, and historical narratives.</p>
+                            <p>Traditional weaving, dyeing, embroidery, and beading techniques create textiles for both everyday use and ceremonial purposes. Many textiles incorporate symbolic patterns and colors with specific cultural meanings and messages.</p>
+                            break;
+
+                        case "Jewelry":
+                            <p>African jewelry combines aesthetic beauty with cultural significance, often denoting status, identity, spiritual protection, or life stages. Crafted from materials like gold, silver, beads, shells, copper, and semi-precious stones, jewelry styles vary widely across regions.</p>
+                            <p>Notable traditions include Maasai beaded collars, Tuareg silver amulets, Ashanti gold weights, Ethiopian crosses, and South African beaded adornments. Many pieces serve protective functions or communicate social information through color and pattern choices.</p>
+                            break;
+
+                        case "Pottery":
+                            <p>African pottery traditions span millennia, with distinct regional styles developed for practical, ceremonial, and decorative purposes. Hand-built using coil, pinch, or molding techniques and often fired in open pits, pottery reflects available materials and cultural needs.</p>
+                            <p>Notable pottery traditions include Zulu beer vessels, Moroccan ceramics, Nigerian terracotta sculptures, and Ethiopian coffee pots. Many pieces feature symbolic decorations, burnished surfaces, or intricate patterns impressed or incised into the clay.</p>
+                            break;
+
+                        case "Weapon":
+                            <p>African weapons combine functional design with artistic expression, often serving as symbols of status, leadership, and cultural identity beyond their practical applications. These include throwing knives, shields, spears, swords, bows, and ceremonial weapons.</p>
+                            <p>Many ceremonial weapons feature elaborate handles, blades with intricate patterns, or decorative elements incorporating beadwork, metalwork, or carved details. Shields often display bold geometric patterns or symbolic designs indicating clan affiliations or warrior status.</p>
+                            break;
+
+                        case "MusicalInstrument":
+                            <p>African musical instruments are both functional tools and works of art, playing central roles in ceremonies, storytelling, and community gatherings. Drums, string instruments, xylophones, flutes, horns, and percussion instruments vary widely across cultural groups.</p>
+                            <p>Many instruments feature carved decoration, symbolic motifs, or elaborate construction techniques. Drums might include carved supports or tensioning systems, string instruments may incorporate resonators made from gourds or animal skins, and xylophones often feature carved keys and resonators arranged in specific tuning systems.</p>
+                            break;
+
+                        case "Furniture":
+                            <p>African furniture combines functional design with artistic expression, often featuring carved decoration, symbolic motifs, or inlaid materials. Traditional forms include stools, chairs, headrests, storage containers, and ceremonial thrones.</p>
+                            <p>Notable examples include Ashanti stools carved from a single piece of wood, Ethiopian three-legged stools, elaborate royal thrones from various kingdoms, and headrests used across East and Southern Africa. Many pieces served specific cultural functions, marking status or supporting particular activities.</p>
+                            break;
+
+                        case "ReligiousItem":
+                            <p>African religious artifacts reflect the continent's diverse spiritual traditions, including indigenous beliefs, Christianity, Islam, and syncretic practices. These objects facilitate worship, protect individuals or communities, or embody spiritual force.</p>
+                            <p>Examples include Ethiopian Orthodox crosses and illuminated manuscripts, divination objects from various traditions, ancestral shrines and altars, ritual vessels, and power objects (often called "fetishes" in Western literature). Many pieces combine symbolic forms with materials believed to hold specific spiritual properties.</p>
+                            break;
+
+                        case "Painting":
+                            <p>African painting traditions include ancient rock art, body painting, architectural decoration, and contemporary fine art practices. Traditional pigments derived from minerals, plants, and clay created distinctive palettes used in rock shelters, on walls, and on portable objects.</p>
+                            <p>Contemporary African painting blends indigenous aesthetic traditions with global influences, addressing themes of cultural identity, history, politics, and daily life. Notable painting traditions include Ndebele house painting in South Africa, Ethiopian icon painting, and the narrative paintings of various contemporary art movements.</p>
+                            break;
+
+                        default:
+                            <p>This category of African artifacts represents one of many diverse artistic traditions found across the continent. African art often combines aesthetic beauty with functional purpose and cultural significance, embodying community values and historical narratives.</p>
+                            <p>Each cultural group developed distinctive styles, techniques, and symbolic systems reflecting their particular environment, social structure, and belief systems. Understanding these artifacts in their cultural context enhances appreciation of their significance beyond their visual appeal.</p>
+                            break;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Artifacts in this Category -->
+    <h2 class="h3 border-pattern mb-4">@categoryName Artifacts</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            @foreach (var artifact in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 card-afribase">
+                        <div class="position-relative">
+                            <img src="@artifact.ImageUrl" class="card-img-top" alt="@artifact.Name" style="height: 250px; object-fit: cover;">
+                            <span class="origin-badge">@artifact.Origin</span>
+                            @if (artifact.IsAvailableForBidding)
+                            {
+                                <span class="badge bg-success position-absolute top-0 start-0 m-2">Available for Bidding</span>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@artifact.Name</h5>
+                            <p class="card-text text-muted mb-1">@artifact.Region • @artifact.Condition</p>
+                            <p class="card-text text-muted mb-2">Est. Year: @artifact.EstimatedYear</p>
+                            <p class="card-text small text-truncate mb-3">@artifact.Description</p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-secondary">@artifact.Origin</span>
+                                <span class="fw-bold text-afribase">
+                                    @if (artifact.IsAvailableForBidding)
+                                    {
+                                        var highestBid = artifact.Bids.OrderByDescending(b => b.BidAmount).FirstOrDefault();
+                                        if (highestBid != null)
+                                        {
+                                            <text>Current Bid: $@highestBid.BidAmount.ToString("N2")</text>
+                                        }
+                                        else if (artifact.StartingBid.HasValue)
+                                        {
+                                            <text>Starting Bid: $@artifact.StartingBid.Value.ToString("N2")</text>
+                                        }
+                                        else
+                                        {
+                                            <text>No bids yet</text>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <text>Value: $@artifact.EstimatedValue.ToString("N2")</text>
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top d-grid">
+                            <a asp-controller="Artifact" asp-action="Details" asp-route-id="@artifact.ArtifactId" class="btn btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mb-5">
+            <i class="fas fa-info-circle me-2"></i> No artifacts in this category are currently available. Please check back later or explore other categories.
+        </div>
+    }
+
+    <!-- Regional Variations -->
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+            <h2 class="h3 mb-3">Regional Variations</h2>
+
+            @switch (categoryName)
+            {
+                case "Mask":
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>West Africa</h3>
+                            <p class="small">Known for elaborate wooden masks with geometric features, often representing ancestral spirits or animals. Dogon, Dan, and Baule masks feature prominently.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Central Africa</h3>
+                            <p class="small">Masks often combine human and animal features with abstract designs. Kuba, Pende, and Luba masks showcase intricate patterns and symbolic elements.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>East Africa</h3>
+                            <p class="small">Masks may incorporate beadwork, natural fibers, and lightweight materials. Ceremonial masks are less common but still significant in specific contexts.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Southern Africa</h3>
+                            <p class="small">Masks are often associated with initiation ceremonies and ancestral veneration. Some incorporate colorful pigments and organic materials.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "Sculpture":
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>West Africa</h3>
+                            <p class="small">Famous for Benin bronzes, Yoruba twin figures (ibeji), and Dogon ancestral figures. Materials range from wood to bronze and terracotta.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Central Africa</h3>
+                            <p class="small">Known for abstract wooden figures, power objects (nkisi), and reliquary guardian figures. Kuba, Luba, and Fang sculptures are particularly notable.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>East Africa</h3>
+                            <p class="small">Sculptures include Makonde ancestor figures, Ethiopian processional crosses, and Tanzanian Sukuma ancestor figures.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Southern Africa</h3>
+                            <p class="small">Features contemporary Zimbabwe stone sculpture, traditional wooden headrests, and various ritual figures.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "Textile":
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>West Africa</h3>
+                            <p class="small">Home to vibrant kente cloth from Ghana, Senegalese indigo-dyed textiles, and Nigerian adire (tie-dye). Strip-weaving and embroidery are common techniques.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>North Africa</h3>
+                            <p class="small">Known for Moroccan carpets, Tunisian embroidery, and Egyptian appliqué work. Geometric patterns and Islamic influences are prevalent.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>East Africa</h3>
+                            <p class="small">Features Ethiopian cotton robes with colorful borders, Maasai beaded textiles, and Ugandan bark cloth. Natural dyes create distinctive color palettes.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Central/Southern Africa</h3>
+                            <p class="small">Includes raffia textiles from Congo, Kuba cloth with geometric patterns, and South African Ndebele beadwork with bold, colorful designs.</p>
+                        </div>
+                    </div>
+                    break;
+
+                case "Jewelry":
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>West Africa</h3>
+                            <p class="small">Known for gold jewelry from Ghana and Mali, lost-wax casting techniques, and symbolic Akan gold weights. Status symbols often incorporate precious metals.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>North Africa</h3>
+                            <p class="small">Features Tuareg silver jewelry with intricate engravings, Moroccan fibulae (pins), and Egyptian metalwork with Islamic influences.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>East Africa</h3>
+                            <p class="small">Famous for Maasai beaded collars and cuffs, Ethiopian crosses in silver and gold, and Eritrean filigree work.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h3 class="h5"><i class="fas fa-map-marker-alt me-2 text-afribase"></i>Southern Africa</h3>
+                            <p class="small">Known for Ndebele beaded aprons and neck rings, Zulu beaded jewelry, and contemporary silverwork combining traditional and modern elements.</p>
+                        </div>
+                    </div>
+                    break;
+
+                default:
+                    <p>African artistic traditions vary greatly across regions, reflecting diverse cultural practices, available materials, and historical influences. Each region has developed distinctive styles, techniques, and symbolic systems for creating artifacts in this category.</p>
+                    <p>Understanding regional variations enhances appreciation for the rich diversity of African artistic expression and the specific cultural contexts in which these artifacts were created and used.</p>
+                    break;
+            }
+        </div>
+    </div>
+
+    <!-- Explore Other Categories -->
+    <h2 class="h3 mb-4">Explore Other Categories</h2>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5">
+        @foreach (var category in Enum.GetValues(typeof(AfriBase.Models.ArtifactCategory)))
+        {
+            if (category.ToString() != categoryName)
+            {
+                <div class="col">
+                    <a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="@category" class="text-decoration-none">
+                        <div class="card h-100 text-center p-4">
+                            @switch (category.ToString())
+                            {
+                                case "Mask":
+                                    <i class="fas fa-mask fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Sculpture":
+                                    <i class="fas fa-monument fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Textile":
+                                    <i class="fas fa-tshirt fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Jewelry":
+                                    <i class="fas fa-gem fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Pottery":
+                                    <i class="fas fa-mortar-pestle fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Weapon":
+                                    <i class="fas fa-shield-alt fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "MusicalInstrument":
+                                    <i class="fas fa-drum fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Furniture":
+                                    <i class="fas fa-chair fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "ReligiousItem":
+                                    <i class="fas fa-pray fa-3x text-afribase mb-3"></i>
+                                    break;
+                                case "Painting":
+                                    <i class="fas fa-paint-brush fa-3x text-afribase mb-3"></i>
+                                    break;
+                                default:
+                                    <i class="fas fa-cubes fa-3x text-afribase mb-3"></i>
+                                    break;
+                            }
+                            <h3 class="h5">@category</h3>
+                            <p class="small text-muted">Explore Artifacts</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-md-12 text-center">
+            <h2 class="section-heading mx-auto">Contact AfriBase Auctions</h2>
+            <p class="lead mt-4">Get in touch with our team for inquiries about African artifacts or bidding.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h3 class="mb-4">Contact Information</h3>
+                    <div class="mb-4">
+                        <h5><i class="bi bi-geo-alt-fill me-2 text-primary"></i>Address</h5>
+                        <p class="ms-4">
+                            AfriBase Headquarters<br>
+                            123 Cultural Heritage Avenue<br>
+                            Johannesburg, South Africa
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <h5><i class="bi bi-telephone-fill me-2 text-primary"></i>Phone</h5>
+                        <p class="ms-4">
+                            +27 10 123 4567<br>
+                            Monday to Friday, 9am - 5pm (SAST)
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <h5><i class="bi bi-envelope-fill me-2 text-primary"></i>Email</h5>
+                        <p class="ms-4">
+                            info@afribase.com<br>
+                            support@afribase.com
+                        </p>
+                    </div>
+                    <div class="mb-4">
+                        <h5><i class="bi bi-chat-dots-fill me-2 text-primary"></i>Social Media</h5>
+                        <div class="ms-4">
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="bi bi-facebook me-1"></i>Facebook</a>
+                            <a href="#" class="btn btn-outline-primary me-2"><i class="bi bi-twitter me-1"></i>Twitter</a>
+                            <a href="#" class="btn btn-outline-primary"><i class="bi bi-instagram me-1"></i>Instagram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h3 class="mb-4">Send Us a Message</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="mb-4">Frequently Asked Questions</h3>
+
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    How do I place a bid on an artifact?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    To place a bid on an artifact, you need to create an account and log in. Browse the artifacts, select the one you're interested in, and enter your bid amount on the artifact details page. Your bid must be higher than the current highest bid.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How can I verify the authenticity of artifacts?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    All artifacts on AfriBase are thoroughly vetted for authenticity. Each artifact comes with detailed information about its origin, estimated age, and condition. If you have specific concerns about an artifact, please contact our authentication team for more information.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    What happens after I win a bid?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    When your bid is accepted, you will receive a notification. Our team will then contact you with payment instructions and shipping details. Once payment is confirmed, the artifact will be carefully packaged and shipped to your specified address.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

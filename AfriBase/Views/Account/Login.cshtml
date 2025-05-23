@@ -1,0 +1,65 @@
+﻿@model AfriBase.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Log in";
+}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <img src="~/images/afribase-logo.png" alt="AfriBase Logo" height="80" class="mb-3" onerror="this.src='/images/default-logo.png'; this.onerror='';" />
+                    <h2 class="text-afribase">Welcome Back</h2>
+                    <p class="text-muted">Sign in to access your account</p>
+                </div>
+                <form class="form-afribase" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Email">Email</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Password">Password</label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" asp-for="RememberMe" />
+                        <label class="form-check-label" asp-for="RememberMe">Remember me</label>
+                    </div>
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="submit" class="btn btn-afribase btn-lg">Log in</button>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a asp-controller="Account" asp-action="ForgotPassword" class="text-decoration-none">Forgot your password?</a>
+                        <a asp-controller="Account" asp-action="Register" class="text-decoration-none">Register as a new user</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card mt-4 border-0 bg-light">
+            <div class="card-body p-4">
+                <h4 class="text-afribase">Test Account Credentials</h4>
+                <p>For demonstration purposes, you can use the following accounts:</p>
+                <div class="mb-2">
+                    <strong>Admin:</strong><br />
+                    Email: admin@afribase.com<br />
+                    Password: Admin123!
+                </div>
+                <div class="mb-2">
+                    <strong>Regular User:</strong><br />
+                    Email: user@afribase.com<br />
+                    Password: User123!
+                </div>
+                <div>
+                    <strong>Seller:</strong><br />
+                    Email: seller@afribase.com<br />
+                    Password: Seller123!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

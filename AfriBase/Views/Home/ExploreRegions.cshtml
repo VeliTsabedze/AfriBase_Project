@@ -1,0 +1,254 @@
+﻿@{
+    ViewData["Title"] = "Explore African Regions";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Artifact" asp-action="Index">Artifacts</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Regions</li>
+        </ol>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="tribal-bg-2 p-5 text-center mb-5 rounded shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <i class="fas fa-globe-africa fa-4x mb-3 text-afribase"></i>
+                <h1 class="display-4">Explore African Regions</h1>
+                <p class="lead">Discover artifacts from different regions across the African continent</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h2 class="h3 border-pattern mb-4">African Regions</h2>
+                    <p>Africa is a continent of extraordinary cultural diversity, with artistic traditions that vary significantly across different regions. Each area has developed distinctive styles, techniques, and symbolic systems reflecting their environments, histories, and social structures.</p>
+                    <p>Explore artifacts from these major regions to discover the rich artistic heritage of the African continent.</p>
+
+                    <div class="text-center mt-4">
+                        <img src="/images/africa-map.jpg" alt="Map of African Regions" class="img-fluid rounded" style="max-height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Regions Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+        <!-- West Africa -->
+        <div class="col">
+            <div class="card h-100 region-card">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="WestAfrica" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">West Africa</h2>
+                        <p>Nigeria, Ghana, Senegal, Mali, Côte d'Ivoire, and more</p>
+                        <p class="small">Known for bronze casting, wood carving, textiles, and masks</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore West African Artifacts</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- North Africa -->
+        <div class="col">
+            <div class="card h-100 region-card">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="NorthAfrica" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">North Africa</h2>
+                        <p>Egypt, Morocco, Algeria, Tunisia, Libya</p>
+                        <p class="small">Famous for ceramics, textiles, metalwork, and architectural arts</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore North African Artifacts</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- East Africa -->
+        <div class="col">
+            <div class="card h-100 region-card">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="EastAfrica" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">East Africa</h2>
+                        <p>Ethiopia, Kenya, Tanzania, Uganda, Somalia</p>
+                        <p class="small">Known for beadwork, religious artifacts, and ceremonial objects</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore East African Artifacts</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Central Africa -->
+        <div class="col">
+            <div class="card h-100 region-card">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="CentralAfrica" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Central Africa</h2>
+                        <p>DR Congo, Cameroon, Gabon, Central African Republic</p>
+                        <p class="small">Famous for masks, figurative sculptures, and ritual objects</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Central African Artifacts</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Southern Africa -->
+        <div class="col">
+            <div class="card h-100 region-card">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="SouthernAfrica" class="text-decoration-none text-dark">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+                        <h2 class="h3 mb-3">Southern Africa</h2>
+                        <p>South Africa, Zimbabwe, Botswana, Namibia, Mozambique</p>
+                        <p class="small">Known for beadwork, basketry, stone sculpture, and contemporary art</p>
+                        <div class="mt-3">
+                            <span class="btn btn-outline-primary">Explore Southern African Artifacts</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Regional Art Facts -->
+    <div class="card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+            <h2 class="h3 border-pattern mb-4">Regional Art Traditions</h2>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-palette text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Materials & Techniques</h3>
+                            <p class="small">Different regions utilize materials readily available in their environments. West Africans excel in wood carving and lost-wax bronze casting, North Africans in ceramics and textiles, while Southern African artists are known for beadwork and basketry techniques.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-users text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Cultural Context</h3>
+                            <p class="small">Art in African cultures often serves functional, religious, or social purposes. Western and Central African masks and figures play roles in ceremonies, while North African art shows strong Islamic influences, and East African art frequently connects to nomadic lifestyles.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exchange-alt text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Historical Influences</h3>
+                            <p class="small">Regional art forms reflect historical connections and trade routes. North African art shows Mediterranean and Islamic influences, East African coastal art reveals Arabic and Indian connections, while Central African art remained relatively isolated until colonial contact.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-sync text-afribase fa-2x me-3"></i>
+                        </div>
+                        <div>
+                            <h3 class="h5">Contemporary Expressions</h3>
+                            <p class="small">Today's African artists often blend traditional techniques with contemporary themes and global influences. Urban centers across all regions have vibrant contemporary art scenes that engage with both traditional heritage and present-day social issues.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-body text-center p-4">
+    <i class="fas fa-map-marked-alt fa-4x mb-3 text-afribase"></i>
+    <h2 class="h3 mb-3">Southern Africa</h2>
+    <p>South Africa, Zimbabwe, Botswana, Namibia, Mozambique</p>
+    <p class="small">Known for beadwork, basketry, stone sculpture, and contemporary art</p>
+    <div class="mt-3">
+        <span class="btn btn-outline-primary">Explore Southern African Artifacts</span>
+    </div>
+</div>
+              
+         
+
+<!-- Regional Art Facts -->
+<div class="card border-0 shadow-sm mb-5">
+    <div class="card-body p-4">
+        <h2 class="h3 border-pattern mb-4">Regional Art Traditions</h2>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-palette text-afribase fa-2x me-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="h5">Materials & Techniques</h3>
+                        <p class="small">Different regions utilize materials readily available in their environments. West Africans excel in wood carving and lost-wax bronze casting, North Africans in ceramics and textiles, while Southern African artists are known for beadwork and basketry techniques.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-users text-afribase fa-2x me-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="h5">Cultural Context</h3>
+                        <p class="small">Art in African cultures often serves functional, religious, or social purposes. Western and Central African masks and figures play roles in ceremonies, while North African art shows strong Islamic influences, and East African art frequently connects to nomadic lifestyles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exchange-alt text-afribase fa-2x me-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="h5">Historical Influences</h3>
+                        <p class="small">Regional art forms reflect historical connections and trade routes. North African art shows Mediterranean and Islamic influences, East African coastal art reveals Arabic and Indian connections, while Central African art remained relatively isolated until colonial contact.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-sync text-afribase fa-2x me-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="h5">Contemporary Expressions</h3>
+                        <p class="small">Today's African artists often blend traditional techniques with contemporary themes and global influences. Urban centers across all regions have vibrant contemporary art scenes that engage with both traditional heritage and present-day social issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

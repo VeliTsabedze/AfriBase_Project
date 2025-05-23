@@ -1,0 +1,222 @@
+﻿@model AfriBase.ViewModels.ArtifactDetailsViewModel
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = Model.Artifact.Name;
+    var currentUser = await UserManager.GetUserAsync(User);
+    var currentUserId = currentUser?.Id;
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Artifact" asp-action="Index">Artifacts</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Artifact" asp-action="ByCategory" asp-route-category="@Model.Artifact.Category">@Model.Artifact.Category</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Artifact.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Artifact Images Section - Improved styling -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-2">
+                    <img src="@Model.Artifact.ImageUrl" class="artifact-image" alt="Image of @Model.Artifact.Name">
+                </div>
+            </div>
+        </div>
+
+        <!-- Artifact Details Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body artifact-details-container">
+                    <h1 class="card-title h2 mb-3">@Model.Artifact.Name</h1>
+
+                    <div class="d-flex mb-3">
+                        <span class="badge bg-primary me-2">@Model.Artifact.Category</span>
+                        <span class="badge bg-secondary me-2">@Model.Artifact.Region</span>
+                        <span class="badge bg-info">@Model.Artifact.Condition</span>
+                    </div>
+
+                    <p class="card-text mb-4">@Model.Artifact.Description</p>
+
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Origin</p>
+                            <p class="fw-bold mb-3">@Model.Artifact.Origin</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Estimated Year</p>
+                            <p class="fw-bold mb-3">@Model.Artifact.EstimatedYear</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Estimated Value</p>
+                            <p class="fw-bold mb-3">$@Model.Artifact.EstimatedValue.ToString("N2")</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted mb-1">Date Added</p>
+                            <p class="fw-bold mb-3">@Model.Artifact.DateAdded.ToString("MMM dd, yyyy")</p>
+                        </div>
+                    </div>
+
+                    @if (Model.Artifact.IsAvailableForBidding)
+                    {
+                        <div class="card bg-light mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Bidding Information</h5>
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        <p class="text-muted mb-1">Starting Bid</p>
+                                        <p class="fw-bold">$@(Model.Artifact.StartingBid?.ToString("N2") ?? "0.00")</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="text-muted mb-1">Current Highest Bid</p>
+                                        <p class="fw-bold text-afribase">
+                                            @if (Model.HighestBid != null)
+                                            {
+                                                <span>$@Model.HighestBid.BidAmount.ToString("N2")</span>
+                                            }
+                                            else
+                                            {
+                                                <span>No bids yet</span>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="mb-1">Total Bids: @Model.Artifact.Bids.Count</p>
+                            </div>
+                        </div>
+
+                        @if (Model.CanBid)
+                        {
+                            <form id="bidForm" asp-controller="Bid" asp-action="PlaceBid" method="post" class="bidding-form mb-4">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" asp-for="NewBidViewModel.ArtifactId" value="@Model.Artifact.ArtifactId" />
+                                <input type="hidden" asp-for="NewBidViewModel.ArtifactName" value="@Model.Artifact.Name" />
+                                <input type="hidden" id="currentHighestBid" value="@(Model.HighestBid?.BidAmount ?? 0)" />
+                                <input type="hidden" id="startingBid" value="@(Model.Artifact.StartingBid ?? 0)" />
+
+                                <div class="mb-3">
+                                    <label for="BidAmount" class="form-label fw-bold">Your Bid Amount ($)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" asp-for="NewBidViewModel.BidAmount" id="BidAmount"
+                                               min="@Model.MinimumBidAmount" step="0.01" required
+                                               placeholder="Enter your bid amount..." />
+                                    </div>
+                                    <div id="bidError" class="text-danger mt-1" style="display: none;"></div>
+                                    <div class="form-text">
+                                        Minimum bid: $@Model.MinimumBidAmount.ToString("N2")
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="Comments" class="form-label">Comments (Optional)</label>
+                                    <textarea class="form-control" asp-for="NewBidViewModel.Comments" id="Comments" rows="2"
+                                              placeholder="Add any comments about your bid..."></textarea>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-afribase btn-lg">Place Bid</button>
+                                </div>
+                            </form>
+                        }
+                        else if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="alert alert-info">
+                                @if (Model.Artifact.OwnerId == currentUserId)
+                                {
+                                    <p class="mb-0">You cannot bid on your own artifact.</p>
+                                }
+                                else if (!User.IsInRole("Bidder"))
+                                {
+                                    <p class="mb-0">You need bidder permissions to place bids.</p>
+                                }
+                                else
+                                {
+                                    <p class="mb-0">Bidding is not available for this artifact at the moment.</p>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">
+                                <p class="mb-0">Please <a asp-controller="Account" asp-action="Login">login</a> or <a asp-controller="Account" asp-action="Register">register</a> to place a bid.</p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <p class="mb-0">This artifact is not available for bidding.</p>
+                        </div>
+                    }
+
+                    @if (Model.CanEdit)
+                    {
+                        <div class="d-flex mt-4 gap-2">
+                            <a asp-controller="Artifact" asp-action="Edit" asp-route-id="@Model.Artifact.ArtifactId" class="btn btn-outline-primary">
+                                <i class="fas fa-edit me-1"></i> Edit
+                            </a>
+                            <a asp-controller="Artifact" asp-action="Delete" asp-route-id="@Model.Artifact.ArtifactId" class="btn btn-outline-danger">
+                                <i class="fas fa-trash-alt me-1"></i> Delete
+                            </a>
+                            @if (User.IsInRole("Admin") || Model.Artifact.OwnerId == currentUserId)
+                            {
+                                <a asp-controller="Bid" asp-action="ArtifactBids" asp-route-id="@Model.Artifact.ArtifactId" class="btn btn-outline-secondary">
+                                    <i class="fas fa-gavel me-1"></i> Manage Bids
+                                </a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seller Information -->
+    <!-- Unchanged -->
+    <!-- Recent Bids Section -->
+    <!-- Unchanged -->
+    <!-- Similar Artifacts Section -->
+    <!-- Unchanged -->
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var bidForm = document.getElementById('bidForm');
+            if (bidForm) {
+                bidForm.addEventListener('submit', function (event) {
+                    var bidAmount = parseFloat(document.getElementById('BidAmount').value);
+                    var currentBid = parseFloat(document.getElementById('currentHighestBid').value);
+                    var startingBid = parseFloat(document.getElementById('startingBid').value);
+                    var bidError = document.getElementById('bidError');
+
+                    bidError.textContent = '';
+                    bidError.style.display = 'none';
+
+                    var isValid = true;
+
+                    if (isNaN(bidAmount)) {
+                        isValid = false;
+                        bidError.textContent = 'Please enter a valid number for your bid.';
+                    } else if (currentBid > 0 && bidAmount <= currentBid) {
+                        isValid = false;
+                        bidError.textContent = `Your bid must be higher than the current highest bid ($${currentBid.toFixed(2)}).`;
+                    } else if (currentBid === 0 && startingBid > 0 && bidAmount < startingBid) {
+                        isValid = false;
+                        bidError.textContent = `Your bid must be at least the starting bid amount ($${startingBid.toFixed(2)}).`;
+                    }
+
+                    if (!isValid) {
+                        event.preventDefault();
+                        bidError.style.display = 'block';
+                    }
+                });
+            }
+        });
+    </script>
+}

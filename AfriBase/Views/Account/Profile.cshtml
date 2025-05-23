@@ -1,0 +1,241 @@
+﻿@model AfriBase.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="profile-card mb-4">
+                <div class="profile-cover"></div>
+                <img src="@Model.ProfileImageUrl" alt="Profile Image" class="profile-avatar shadow" />
+                <div class="profile-info">
+                    <h2 class="h4 mb-1">@(Model.FirstName + " " + Model.LastName)</h2>
+                    <p class="text-muted mb-3">@Model.Email</p>
+                    <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>@Model.Country</p>
+                    @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+                    {
+                        <p class="mb-0"><i class="fas fa-phone me-2"></i>@Model.PhoneNumber</p>
+                    }
+                    <hr />
+                    @if (!string.IsNullOrEmpty(Model.Bio))
+                    {
+                        <h6 class="mb-2">About</h6>
+                        <p class="mb-0">@Model.Bio</p>
+                    }
+                    else
+                    {
+                        <p class="text-muted fst-italic">No bio provided.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Account Summary</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Owned Artifacts:</span>
+                        <span class="fw-bold">@Model.OwnedArtifacts.Count</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Active Bids:</span>
+                        <span class="fw-bold">@Model.RecentBids.Count(b => b.Status == AfriBase.Models.BidStatus.Pending)</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Won Auctions:</span>
+                        <span class="fw-bold">@Model.RecentBids.Count(b => b.Status == AfriBase.Models.BidStatus.Won || b.Status == AfriBase.Models.BidStatus.Accepted)</span>
+                    </div>
+
+                    <hr />
+
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Bid" asp-action="UserBidHistory" class="btn btn-outline-primary">
+                            <i class="fas fa-gavel me-2"></i>View Bid History
+                        </a>
+                        @if (User.IsInRole("Seller"))
+                        {
+                            <a asp-controller="Artifact" asp-action="Create" class="btn btn-outline-success">
+                                <i class="fas fa-plus-circle me-2"></i>Add New Artifact
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h4 class="card-title border-pattern mb-4">Edit Profile</h4>
+
+                    <form class="form-afribase" asp-controller="Account" asp-action="Profile" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                                    <label asp-for="FirstName">First Name</label>
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                                    <label asp-for="LastName">Last Name</label>
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" placeholder="Email" readonly />
+                            <label asp-for="Email">Email (cannot be changed)</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                            <label asp-for="PhoneNumber">Phone Number</label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Country" class="form-control" placeholder="Country" />
+                            <label asp-for="Country">Country</label>
+                            <span asp-validation-for="Country" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <textarea asp-for="Bio" class="form-control" placeholder="Bio" style="height: 120px"></textarea>
+                            <label asp-for="Bio">Bio (Optional)</label>
+                            <span asp-validation-for="Bio" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ProfileImage" class="form-label">Profile Image</label>
+                            <input asp-for="ProfileImage" type="file" class="form-control" accept="image/*" />
+                            <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                            <div class="form-text">Upload a profile picture. Recommended size: 300x300 pixels.</div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-afribase">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @if (Model.OwnedArtifacts.Any())
+            {
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="card-title mb-0">My Artifacts</h4>
+                            <a asp-controller="Artifact" asp-action="Create" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-plus-circle me-1"></i> Add New
+                            </a>
+                        </div>
+
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            @foreach (var artifact in Model.OwnedArtifacts)
+                            {
+                                <div class="col">
+                                    <div class="card h-100">
+                                        <img src="@artifact.ImageUrl" class="card-img-top" alt="@artifact.Name" style="height: 150px; object-fit: cover;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@artifact.Name</h5>
+                                            <p class="card-text text-muted mb-1">@artifact.Category • @artifact.Region</p>
+                                            <p class="card-text small text-truncate mb-2">@artifact.Description</p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="badge bg-secondary">@artifact.Origin</span>
+                                                <span class="text-muted small">Added: @artifact.DateAdded.ToString("MMM dd, yyyy")</span>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-white border-top d-flex justify-content-between">
+                                            <a asp-controller="Artifact" asp-action="Details" asp-route-id="@artifact.ArtifactId" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-eye me-1"></i> View
+                                            </a>
+                                            <a asp-controller="Artifact" asp-action="Edit" asp-route-id="@artifact.ArtifactId" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-edit me-1"></i> Edit
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (Model.RecentBids.Any())
+            {
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="card-title mb-0">Recent Bids</h4>
+                            <a asp-controller="Bid" asp-action="UserBidHistory" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-list me-1"></i> View All
+                            </a>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Artifact</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bid in Model.RecentBids.Take(5))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-controller="Artifact" asp-action="Details" asp-route-id="@bid.ArtifactId" class="text-decoration-none">
+                                                    @bid.Artifact.Name
+                                                </a>
+                                            </td>
+                                            <td class="fw-bold text-primary">$@bid.BidAmount.ToString("N2")</td>
+                                            <td>@bid.BidDate.ToString("MMM dd, yyyy")</td>
+                                            <td>
+                                                @switch (bid.Status)
+                                                {
+                                                    case AfriBase.Models.BidStatus.Pending:
+                                                        <span class="bid-status bid-status-pending">Pending</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Accepted:
+                                                    case AfriBase.Models.BidStatus.Won:
+                                                        <span class="bid-status bid-status-accepted">Won</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Rejected:
+                                                        <span class="bid-status bid-status-rejected">Rejected</span>
+                                                        break;
+                                                    case AfriBase.Models.BidStatus.Outbid:
+                                                        <span class="bid-status bid-status-outbid">Outbid</span>
+                                                        break;
+                                                    default:
+                                                        <span class="bid-status">@bid.Status</span>
+                                                        break;
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

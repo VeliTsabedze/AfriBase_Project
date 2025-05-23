@@ -1,0 +1,211 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    var featuredArtifacts = ViewData["FeaturedArtifacts"] as List<AfriBase.Models.Artifact> ?? new List<AfriBase.Models.Artifact>();
+    var recentBids = ViewData["RecentBids"] as List<AfriBase.Models.Bid> ?? new List<AfriBase.Models.Bid>();
+}
+
+<!-- Hero Section -->
+<div class="hero mb-5">
+    <div class="container hero-content text-center">
+        <h1 class="display-4 mb-3">Discover African Heritage</h1>
+        <p class="lead mb-4">Explore authentic African artifacts, bid on unique pieces, and connect with collectors from around the world.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-controller="Artifact" asp-action="Index" class="btn btn-primary btn-lg">Browse Artifacts</a>
+            <a asp-controller="Home" asp-action="About" class="btn btn-outline-light btn-lg">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Artifacts Section -->
+<section class="mb-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="border-pattern">Featured Artifacts</h2>
+            <a asp-controller="Artifact" asp-action="Index" class="btn btn-outline-primary">View All</a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @if (featuredArtifacts.Any())
+            {
+                foreach (var artifact in featuredArtifacts)
+                {
+                    <div class="col featured-artifact" style="opacity: 0;">
+                        <div class="card card-afribase h-100">
+                            <div class="position-relative">
+                                <img src="@artifact.ImageUrl" class="card-img-top" alt="@artifact.Name">
+                                <span class="origin-badge">@artifact.Origin</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@artifact.Name</h5>
+                                <p class="card-text text-truncate">@artifact.Description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-secondary">@artifact.Category</span>
+                                    <span class="fw-bold text-afribase">
+                                        @(artifact.Bids.Any()
+                                            ? $"Current Bid: ${artifact.Bids.Max(b => b.BidAmount)}"
+                                            : artifact.StartingBid.HasValue
+                                            ? $"Starting Bid: ${artifact.StartingBid.Value}"
+                                            : $"Value: ${artifact.EstimatedValue}")
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card-footer d-grid">
+                                <a asp-controller="Artifact" asp-action="Details" asp-route-id="@artifact.ArtifactId" class="btn btn-afribase">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No featured artifacts available at the moment. Check back soon!
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- African Regions Section -->
+<section class="section-pattern mb-5">
+    <div class="container">
+        <h2 class="text-center border-pattern mb-5">Explore African Regions</h2>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="WestAfrica" class="text-decoration-none">
+                    <div class="region-card region-card-west-africa" style="transition: all 0.3s ease;">
+                        <div class="region-card-content">
+                            <h3 class="h4 mb-0">West Africa</h3>
+                            <p class="mb-0">Explore artifacts</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="EastAfrica" class="text-decoration-none">
+                    <div class="region-card region-card-east-africa" style="transition: all 0.3s ease;">
+                        <div class="region-card-content">
+                            <h3 class="h4 mb-0">East Africa</h3>
+                            <p class="mb-0">Explore artifacts</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="SouthernAfrica" class="text-decoration-none">
+                    <div class="region-card region-card-southern-africa" style="transition: all 0.3s ease;">
+                        <div class="region-card-content">
+                            <h3 class="h4 mb-0">Southern Africa</h3>
+                            <p class="mb-0">Explore artifacts</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a asp-controller="Artifact" asp-action="ByRegion" asp-route-region="NorthAfrica" class="text-decoration-none">
+                    <div class="region-card region-card-north-africa" style="transition: all 0.3s ease;">
+                        <div class="region-card-content">
+                            <h3 class="h4 mb-0">North Africa</h3>
+                            <p class="mb-0">Explore artifacts</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Activity Section -->
+<section class="mb-5">
+    <div class="container">
+        <h2 class="border-pattern mb-4">Recent Bidding Activity</h2>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Artifact</th>
+                        <th>Bidder</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (recentBids.Any())
+                    {
+                        foreach (var bid in recentBids)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-controller="Artifact" asp-action="Details" asp-route-id="@bid.ArtifactId" class="text-decoration-none">
+                                        <div class="d-flex align-items-center">
+                                            <img src="@bid.Artifact.ImageUrl" alt="@bid.Artifact.Name" class="me-2" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+                                            <span>@bid.Artifact.Name</span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td>@bid.User.FullName</td>
+                                <td class="fw-bold text-afribase">$@bid.BidAmount</td>
+                                <td>@bid.BidDate.ToString("MMM dd, yyyy HH:mm")</td>
+                                <td>
+                                    @switch (bid.Status)
+                                    {
+                                        case AfriBase.Models.BidStatus.Pending:
+                                            <span class="bid-status bid-status-pending">Pending</span>
+                                            break;
+                                        case AfriBase.Models.BidStatus.Accepted:
+                                        case AfriBase.Models.BidStatus.Won:
+                                            <span class="bid-status bid-status-accepted">Accepted</span>
+                                            break;
+                                        case AfriBase.Models.BidStatus.Rejected:
+                                            <span class="bid-status bid-status-rejected">Rejected</span>
+                                            break;
+                                        case AfriBase.Models.BidStatus.Outbid:
+                                            <span class="bid-status bid-status-outbid">Outbid</span>
+                                            break;
+                                        default:
+                                            <span class="bid-status">@bid.Status</span>
+                                            break;
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center">No recent bidding activity.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+@if (!User.Identity.IsAuthenticated)
+{
+    <section class="mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="card border-0 bg-afribase text-white shadow">
+                        <div class="card-body p-5 text-center">
+                            <h3 class="mb-3">Join Our Community</h3>
+                            <p class="lead mb-4">Register now to start bidding on authentic African artifacts and connect with collectors around the world.</p>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <a asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg px-4">Register</a>
+                                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-lg px-4">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
